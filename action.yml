@@ -1,4 +1,4 @@
-name: "Code Deployer
+name: "Deploy Dispatcher"
 description: "Deploy Code to Remote Server using rsync"
 author: "TremiDkhar"
 branding:
