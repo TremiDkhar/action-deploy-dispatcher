@@ -38,7 +38,9 @@ function build_sync_command() {
 	fi
 
 	# Ignore everything in the .gitingore file. With proper .gitignore file, it will ignore all the files (especially to not delete) that are there on the remote server.
-	sync_command="${sync_command} --exclude-from=.gitignore"
+	if [ -f .gitignore ]; then
+		sync_command="${sync_command} --exclude-from=.gitignore"
+	fi
 
 }
 
