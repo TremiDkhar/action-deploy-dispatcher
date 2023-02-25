@@ -1,0 +1,42 @@
+name: "Code Deployer"
+description: "Deploy Code to Remote Server using rsync"
+author: "Tremi Dkhar"
+version: "0.1.0"
+inputs:
+  remote_host:
+    description: "Remote Host"
+    required: true
+  remote_user:
+    description: "Remote User"
+    required: true
+  remote_path:
+    description: "Remote Path"
+    required: true
+  ssh_private_key:
+    description: "SSH Private Key"
+    required: false
+  ssh_private_key_password:
+    description: "The SSH Private Key Password"
+    required: false
+  ssh_login_password:
+    description: "The SSH login passphrase/password"
+    required: false
+  rsync_switches:
+    description: "rsync switches"
+    required: true
+    default: "-az --chown=www-data:www-data --progress"
+runs:
+  using: 'composite'
+  steps:
+    - name: "Deploy"
+      env:
+        REMOTE_HOST: ${{ inputs.remote_host }}
+        REMOTE_USER: ${{ inputs.remote_user }}
+        REMOTE_PATH: ${{ inputs.remote_path }}
+        SSH_LOGIN_PASSWORD: ${{ inputs.ssh_login_password }}
+        SSH_PRIVATE_KEY: ${{ inputs.ssh_private_key }}
+        SSH_PRIVATE_KEY_PASSWORD: ${{ inputs.ssh_private_key_password }}
+      run: |
+        chmod +x ${{ github.action_path }}/deploy.sh
+        ${{ github.action_path }}/deploy.sh
+      shell: bash
