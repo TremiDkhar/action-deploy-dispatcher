@@ -27,12 +27,12 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
       - name: Deploy Dispatcher
-        uses: TremiDkhar/action-code-deployer@v0.1.2
+        uses: TremiDkhar/action-deploy-dispatcher@v0.1.2
         with:
           remote_user: ${{ secrets.REMOTE_USER }}
           remote_host: ${{ secrets.REMOTE_HOST }}
           remote_path: ${{ secrets.REMOTE_PATH }}
           ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }}
           ssh_private_key_password: ${{ secrets.SSH_PRIVATE_KEY_PASSWORD }}
-          rsync_switches: '-azh --chown=www-data:www-data --progress --delete-during'
+          rsync_switches: '-azh --chown=www-data:www-data --progress'
 ```
